@@ -1,6 +1,7 @@
 
 public class Parcel
 {
+    public long ParcelId { get; set; }
     public string Pin { get; set; }
     public string Address { get; set; }
     public string Owner { get; set; }
