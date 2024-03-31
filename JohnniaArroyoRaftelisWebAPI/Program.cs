@@ -9,6 +9,16 @@ builder.Services.AddSingleton<IParcelService, ParcelService>();
 
 var app = builder.Build();
 
+// Configure CORS
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
+
+app.MapControllers();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
