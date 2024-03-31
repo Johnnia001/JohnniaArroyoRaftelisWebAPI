@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Management</title>
+</head>
+<body>
+    <h1>Parcel Management System</h1>
+
+    <!-- Buttons for sorting parcels -->
+    <button onclick="fetchParcelsSortedByStreet()">Sort by Street</button>
+    <button onclick="fetchParcelsSortedByFirstName()">Sort by First Name</button>
+
+    <div id="parcels"></div>
+
+    <script>
+        // Function to fetch parcels from the API sorted by street
+        async function fetchParcelsSortedByStreet() {
+            try {
+                const apiUrl = 'http://localhost:5210/api/Parcels/sortedByStreet';
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch sorted parcels by street');
+                }
+                const parcels = await response.json();
+                displayParcels(parcels);
+            } catch (error) {
+                console.error('Error fetching sorted parcels by street:', error);
+            }
+        }
+
+        // Function to fetch parcels from the API sorted by first name
+        async function fetchParcelsSortedByFirstName() {
+            try {
+                const apiUrl = 'http://localhost:5210/api/Parcels/sortedByFirstName';
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch sorted parcels by first name');
+                }
+                const parcels = await response.json();
+                displayParcels(parcels);
+            } catch (error) {
+                console.error('Error fetching sorted parcels by first name:', error);
+            }
+        }
+
+        // Function to display parcels on the page
+        function displayParcels(parcels) {
+            const parcelsDiv = document.getElementById('parcels');
+            parcelsDiv.innerHTML = ''; // Clear previous content
+            parcels.forEach(parcel => {
+                const parcelDiv = document.createElement('div');
+                parcelDiv.innerHTML = `
+                    <p><strong>Parcel ID:</strong> ${parcel.parcelId}</p>
+                    <p><strong>Address:</strong> ${parcel.address}</p>
+                    <p><strong>Owner:</strong> ${parcel.owner}</p>
+                    <p><strong>Market Value:</strong> ${parcel.marketValue}</p>
+                    <p><strong>Sale Date:</strong> ${parcel.saleDate}</p>
+                    <p><strong>Sale Price:</strong> ${parcel.salePrice}</p>
+                    <p><strong>Link:</strong> <a href="${parcel.link}" target="_blank">${parcel.link}</a></p>
+                    <p><strong>Google Maps Link:</strong> <a href="${parcel.googleMapsLink}" target="_blank">View on Google Maps</a></p>
+                    <hr>
+                `;
+                parcelsDiv.appendChild(parcelDiv);
+            });
+        }
+
+        // Fetch parcels when the page loads
+        fetchParcelsSortedByStreet(); // Fetch sorted parcels by street by default
+    </script>
+</body>
+</html>
