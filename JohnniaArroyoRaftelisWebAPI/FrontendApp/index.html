@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parcel Management</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Parcel Management System</h1>
+    <h2>Sort By:</h2>
 
     <!-- Buttons for sorting parcels -->
-    <button onclick="fetchParcelsSortedByStreet()">Sort by Street</button>
-    <button onclick="fetchParcelsSortedByFirstName()">Sort by First Name</button>
+    <button class="button-49" onclick="fetchParcelsSortedByStreet()">Street</button>
+    <button class="button-49" onclick="fetchParcelsSortedByFirstName()">First Name</button>
 
     <div id="parcels"></div>
 
